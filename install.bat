@@ -76,14 +76,17 @@ if not exist "%javaFolder%" (
 :: ---------------------- Jar -------------------------
 
 if exist "%jarPath%" (
+	echo zkteco.exe stoping
 	.\zkteco.exe stop
 	timeout /t 3 /nobreak >nul
-	del	medsoft-tkteco-client.jar
+	del medsoft-tkteco-client.jar
 	
 	echo Downloading Jar...
 	powershell -Command "& {Invoke-WebRequest -Uri 'https://github.com/mitpcllc/zkteco/raw/main/medsoft-tkteco-client.jar' -OutFile 'medsoft-tkteco-client.jar'}"
 	echo Jar downloaded.
-	
+
+	echo zkteco.exe starting
+	.\zkteco.exe install
 	.\zkteco.exe start
 ) else (
 	echo Downloading Jar...
